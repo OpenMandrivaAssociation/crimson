@@ -1,0 +1,60 @@
+--- build.xml~	2001-11-01 08:27:04.000000000 +0200
++++ build.xml	2003-04-10 19:56:10.000000000 +0300
+@@ -157,7 +157,7 @@
+     </copy>
+   </target>
+ 
+-  <target name="crimson.jar" depends="compile-api,compile-impl">
++  <target name="crimson.jar" depends="compile-impl">
+     <mkdir dir="${build.classes}/META-INF/services" />
+     <copy todir="${build.classes}/META-INF/services">
+       <fileset dir="src/META-INF/services">
+@@ -172,7 +172,6 @@
+          manifest="${build.classes}/META-INF/manifest.crimson">
+       <include name="META-INF/services/**" />
+       <include name="org/apache/crimson/**" />
+-      <patternset refid="api-patternset"/>
+     </jar>
+   </target>
+ 
+--- src/META-INF/manifest.crimson~	2001-11-01 08:27:01.000000000 +0200
++++ src/META-INF/manifest.crimson	2003-04-10 20:01:17.000000000 +0300
+@@ -1,38 +1,6 @@
+ Manifest-Version: 1.0
+ Sealed: false
+ 
+-Name: javax/xml/parsers/
+-Specification-Title: Java API for XML Processing
+-Specification-Version: @jaxp-spec-version@
+-Specification-Vendor: Sun Microsystems Inc.
+-Implementation-Title: javax.xml.parsers
+-Implementation-Version: @impl-version@
+-Implementation-Vendor: Apache Software Foundation
+-
+-Name: org/xml/sax/
+-Specification-Title: Simple API for XML
+-Specification-Vendor: David Megginson
+-Specification-Version: 2.0
+-Implementation-Title: org.xml.sax
+-Implementation-Version: 2.0
+-Implementation-Vendor: http://www.megginson.com/SAX/index.html
+-
+-Name: org/xml/sax/helpers/
+-Specification-Title: Simple API for XML
+-Specification-Vendor: David Megginson
+-Specification-Version: 2.0
+-Implementation-Title: org.xml.sax.helpers
+-Implementation-Version: 2.0
+-Implementation-Vendor: http://www.megginson.com/SAX/index.html
+-
+-Name: org/w3c/dom/
+-Specification-Title: Document Object Model, Level 2 Core
+-Specification-Vendor: World Wide Web Consortium
+-Specification-Version: 1.0
+-Implementation-Title: org.w3c.dom
+-Implementation-Version: 1.0
+-Implementation-Vendor: World Wide Web Consortium
+-
+ Name: org/apache/crimson/parser/
+ Specification-Title: Java API for XML Processing
+ Specification-Vendor: Sun Microsystems Inc.
