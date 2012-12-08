@@ -37,7 +37,7 @@
 Name: crimson
 Epoch: 0
 Version: 1.1.3
-Release: %mkrel 17.0.2
+Release: 20
 Summary: Java XML parser
 
 Group: Development/Java
@@ -47,7 +47,8 @@ License: Apache Software License
 URL: http://xml.apache.org/%{name}
 Source0: http://xml.apache.org/dist/%{name}/%{name}-%{version}-src.tar.gz
 Patch0: %{name}-noapis.patch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Patch1: %{name}-javac6-build.patch
+Patch2: %{name}-javac-target-15.patch
 Provides: jaxp_parser_impl
 %if ! %{gcj_support}
 BuildArch: noarch
@@ -63,6 +64,7 @@ Requires: jpackage-utils >= 0:1.6
 %if %{gcj_support}
 BuildRequires: java-gcj-compat-devel
 %endif
+BuildRequires: java-1.6.0-openjdk-devel
 
 %description
 Crimson is a Java XML parser which supports XML 1.0 via the following
@@ -104,6 +106,8 @@ Demonstrations and samples for %{name}.
 %prep
 %setup -q
 %patch0 -p0
+%patch1 -p0
+%patch2 -p0
 
 # -----------------------------------------------------------------------------
 
@@ -115,40 +119,35 @@ export CLASSPATH=$(build-classpath xml-commons-apis)
 # -----------------------------------------------------------------------------
 
 %install
-%{__rm} -rf $RPM_BUILD_ROOT
-
 # jars
-%{__mkdir} -p ${RPM_BUILD_ROOT}%{_javadir}
-%{__cp} -p build/%{name}.jar \
-    ${RPM_BUILD_ROOT}%{_javadir}/%{name}-%{version}.jar
+%__mkdir_p %{buildroot}%{_javadir}
+cp -p build/%{name}.jar \
+    %{buildroot}%{_javadir}/%{name}-%{version}.jar
 (
-    cd $RPM_BUILD_ROOT%{_javadir}
+    cd %{buildroot}%{_javadir}
     for jar in *-%{version}*; do 
         %{__ln_s} -f ${jar} `echo $jar | sed "s|-%{version}||g"`
     done
 )
 
 # javadoc
-%{__mkdir} -p ${RPM_BUILD_ROOT}%{_javadocdir}/%{name}-%{version}
-%{__cp} -pr build/docs/api/* \
-    ${RPM_BUILD_ROOT}%{_javadocdir}/%{name}-%{version}
-%{__ln_s} %{name}-%{version} \
-    ${RPM_BUILD_ROOT}%{_javadocdir}/%{name} # ghost symlink
+%__mkdir_p %{buildroot}%{_javadocdir}/%{name}-%{version}
+cp -pr build/docs/api/* \
+    %{buildroot}%{_javadocdir}/%{name}-%{version}
+%__ln_s %{name}-%{version} \
+    %{buildroot}%{_javadocdir}/%{name} # ghost symlink
 
 # demo
-%{__mkdir} -p ${RPM_BUILD_ROOT}%{_datadir}/%{name}
-%{__cp} -pr examples ${RPM_BUILD_ROOT}%{_datadir}/%{name}
+%__mkdir_p %{buildroot}%{_datadir}/%{name}
+cp -pr examples %{buildroot}%{_datadir}/%{name}
 
 # jaxp_parser_impl ghost symlink
-%{__ln_s} %{_sysconfdir}/alternatives \
-    ${RPM_BUILD_ROOT}%{_javadir}/jaxp_parser_impl.jar
+%__ln_s %{_sysconfdir}/alternatives \
+    %{buildroot}%{_javadir}/jaxp_parser_impl.jar
 
 %if %{gcj_support}
     %{_bindir}/aot-compile-rpm
 %endif
-
-%clean
-%{__rm} -rf $RPM_BUILD_ROOT
 
 # -----------------------------------------------------------------------------
 
@@ -196,3 +195,103 @@ fi
 %defattr(0644,root,root,0755)
 %{_datadir}/%{name}
 
+
+
+%changelog
+* Thu May 10 2012 Andrew Lukoshko <andrew.lukoshko@rosalab.ru> 0:1.1.3-18
+- patched to build with JDK6
+
+* Sat Dec 29 2007 David Walluck <walluck@mandriva.org> 0:1.1.3-17.0.1mdv2008.1
++ Revision: 139080
+- import crimson
+
+* Wed May 30 2007 Jason Corley <jason.corley@gmail.com> - 0:1.1.3-17jpp
+- syntactic cleanup
+- rebuild in mock
+
+* Fri May 11 2007 Ralph Apel <r.apel at r-apel.de> - 0:1.1.3-16jpp
+- Make Vendor, Distribution based on macro
+
+* Fri Feb 09 2007 Ralph Apel <r.apel at r-apel.de> - 0:1.1.3-15jpp
+- Add gcj_support option
+- Fix and reactivate javadoc
+
+* Wed Jan 04 2006 Fernando Nasser <fnasser@redhat.com> - 0:1.1.3-14jpp
+- First JPP 1.7 build
+
+* Fri Aug 20 2004 Ralph Apel <r.apel at r-apel.de> - 0:1.1.3-13jpp
+- Build with ant-1.6.2
+
+* Wed Jun  4 2003 Ville Skyttä <ville.skytta at iki.fi> - 0:1.1.3-12jpp
+- Own (ghost) %%{_javadir}/jaxp_parser_impl.jar.
+- Remove alternatives in preun instead of postun.
+
+* Thu Apr 10 2003 Ville Skyttä <ville.skytta at iki.fi> - 0:1.1.3-11jpp
+- Rebuild for JPackage 1.5.
+- Change alternative to point to non-versioned jar, don't remove it on upgrade.
+- Don't include JAXP API classes in crimson.jar.
+- Drop javadoc package (contained only JAXP APIs).
+
+* Thu Aug 22 2002 Guillaume Rousse <guillomovitch@users.sourceforge.net> 1.1.3-10jpp
+- corrected case for Group tag
+- no macro for Url tag
+
+* Mon Jul 01 2002 Guillaume Rousse <guillomovitch@users.sourceforge.net> 1.1.3-9jpp
+- use sed instead of bash 2.x extension in link area to make spec compatible with distro using bash 1.1x
+- provides jaxp_parser_impl
+- priority lowered to 20
+
+* Tue May 07 2002 Guillaume Rousse <guillomovitch@users.sourceforge.net> 1.1.3-8jpp
+- vendor, distribution, group tags
+
+* Sun Mar 10 2002 Guillaume Rousse <guillomovitch@users.sourceforge.net> 1.1.3-7jpp
+- provides jaxp_parser2 virtual resource
+
+* Sat Jan 19 2002 Guillaume Rousse <guillomovitch@users.sourceforge.net> 1.1.3-6jpp
+- no need of stylebook, yet another cut'n'past sequel
+- section macro
+
+* Fri Jan 11 2002 Guillaume Rousse <guillomovitch@users.sourceforge.net> 1.1.3-5jpp
+- fixed demo requires
+- javadoc in %%{_datadir}/javadoc again
+
+* Thu Dec 20 2001 Guillaume Rousse <guillomovitch@users.sourceforge.net> 1.1.3-4jpp
+- javadoc back to /usr/share/doc
+- doc and javadoc requires nothing
+- demo requires exact version and release
+- requires /usr/sbin/update-alternatives
+
+* Wed Dec 5 2001 Guillaume Rousse <guillomovitch@users.sourceforge.net> 1.1.3-3jpp
+- javadoc into javadoc package
+
+* Wed Nov 21 2001 Christian Zoffoli <czoffoli@littlepenguin.org> 1.1.3-2jpp
+- removed packager tag
+- new jpp extension
+
+* Sat Oct 6 2001 Guillaume Rousse <guillomovitch@users.sourceforge.net> 1.1.3-1jpp
+- 1.1.3
+- used original tarball
+
+* Sun Sep 30 2001 Guillaume Rousse <guillomovitch@users.sourceforge.net> 1.1.2-0.beta2.2jpp
+- first unified release
+- s/jPackage/JPackage
+
+* Fri Sep 07 2001 Guillaume Rousse <guillomovitch@users.sourceforge.net> 1.1.2-0.beta2.1mdk
+- 1.1.2beta2
+- used source distribution
+- no more wrapper as one jar only
+- example subpackage is now demo subpackage
+- moved demo files in %%{_datadir}/%%{name}
+
+* Sat Sep 01 2001 Guillaume Rousse <guillomovitch@users.sourceforge.net> 1.1.1-4mdk
+- used cvs instead of mixed release
+- moved examples %%{javadir}/%%{name}
+
+* Tue Jul 31 2001 Guillaume Rousse <guillomovitch@users.sourceforge.net> 1.1.1-3mdk
+- jaxp_parser symlink is now jaxp_parser.jar
+
+* Tue Jul 24 2001 Guillaume Rousse <guillomovitch@users.sourceforge.net> 1.1.1-2mdk
+- changed priority to 30
+
+* Mon Jul 23 2001 Guillaume Rousse <guillomovitch@users.sourceforge.net> 1.1.1-1mdk
+- first Mandrake release, using a build script stolen from Henry Gomez <gomez@slib.fr>

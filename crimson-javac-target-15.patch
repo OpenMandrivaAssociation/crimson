@@ -1,0 +1,44 @@
+--- build.xml
++++ build.xml
+@@ -125,7 +125,8 @@
+            destdir="${build.classes}"
+            debug="${debug}"
+            optimize="${optimize}"
+-           deprecation="off">
++           deprecation="off"
++           target="1.5">
+       <classpath>
+         <pathelement location="${build.classes}"/>
+       </classpath>
+@@ -139,7 +140,8 @@
+            destdir="${build.classes}"
+            debug="${debug}"
+            optimize="${optimize}"
+-           deprecation="off" >
++           deprecation="off"
++           target="1.5">
+       <classpath>
+         <pathelement location="${build.classes}" />
+       </classpath>
+--- examples/DOMEcho/build.xml
++++ examples/DOMEcho/build.xml
+@@ -25,7 +25,7 @@
+ 
+   <!-- Compile the example program -->
+   <target name="compile">
+-    <javac srcdir=".">
++    <javac srcdir="." target="1.5">
+       <classpath refid="project-classpath" />
+       <exclude name="**/,**" />
+       <exclude name="**/SCCS/**" />
+--- examples/SAXTagCount/build.xml
++++ examples/SAXTagCount/build.xml
+@@ -25,7 +25,7 @@
+ 
+   <!-- Compile the example program -->
+   <target name="compile">
+-    <javac srcdir=".">
++    <javac srcdir="." target="1.5">
+       <classpath refid="project-classpath" />
+       <exclude name="**/,**" />
+       <exclude name="**/SCCS/**" />

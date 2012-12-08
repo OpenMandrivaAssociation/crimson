@@ -1,0 +1,613 @@
+--- src/org/apache/crimson/jaxp/DocumentBuilderFactoryImpl.java
++++ src/org/apache/crimson/jaxp/DocumentBuilderFactoryImpl.java
+@@ -102,4 +102,14 @@
+     {
+         throw new IllegalArgumentException("No attributes are implemented");
+     }
++
++    //java5 build
++    public boolean getFeature(String name)
++        throws ParserConfigurationException {
++        throw new ParserConfigurationException("No features are implemented");
++    }
++    public void setFeature(String name, boolean value)
++        throws ParserConfigurationException {
++        throw new ParserConfigurationException("No features are implemented");
++    }
+ }
+--- src/org/apache/crimson/tree/AttributeNode.java
++++ src/org/apache/crimson/tree/AttributeNode.java
+@@ -321,4 +321,50 @@
+             throw new DomEx (DomEx.HIERARCHY_REQUEST_ERR);
+         }
+     }
++    
++    // java5 build - interface org.w3c.dom.Node
++    public Object setUserData(String key, Object data, UserDataHandler handler) {
++        throw new RuntimeException("Not implemented");
++    }
++    public Object getUserData(String key) {
++        throw new RuntimeException("Not implemented");
++    }
++    public Object getFeature(String feature, String version) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isEqualNode(Node arg) {
++        throw new RuntimeException("Not implemented");
++    }
++    public String lookupNamespaceURI(String prefix) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isDefaultNamespace(String namespaceURI) {
++        throw new RuntimeException("Not implemented");
++    }
++    public String lookupPrefix(String namespaceURI) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isSameNode(Node other) {
++        throw new RuntimeException("Not implemented");
++    }
++    public void setTextContent(String textContent) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getTextContent() throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public short compareDocumentPosition(Node other) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getBaseURI() {
++        throw new RuntimeException("Not implemented");
++    }
++
++    // java5 build - interface org.w3c.dom.Attr
++    public boolean isId() {
++        throw new RuntimeException("Not implemented");
++    }
++    public TypeInfo getSchemaTypeInfo() {
++        throw new RuntimeException("Not implemented");
++    }
+ }
+--- src/org/apache/crimson/tree/CommentNode.java
++++ src/org/apache/crimson/tree/CommentNode.java
+@@ -131,4 +131,43 @@
+ 
+     /** Returns the string "#comment". */
+     public String getNodeName () { return "#comment"; }
++
++    // java5 build - interface org.w3c.dom.Node
++    public Object setUserData(String key, Object data, UserDataHandler handler) {
++        throw new RuntimeException("Not implemented");
++    }
++    public Object getUserData(String key) {
++        throw new RuntimeException("Not implemented");
++    }
++    public Object getFeature(String feature, String version) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isEqualNode(Node arg) {
++        throw new RuntimeException("Not implemented");
++    }
++    public String lookupNamespaceURI(String prefix) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isDefaultNamespace(String namespaceURI) {
++        throw new RuntimeException("Not implemented");
++    }
++    public String lookupPrefix(String namespaceURI) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isSameNode(Node other) {
++        throw new RuntimeException("Not implemented");
++    }
++    public void setTextContent(String textContent) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getTextContent() throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public short compareDocumentPosition(Node other) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getBaseURI() {
++        throw new RuntimeException("Not implemented");
++    }
++
+ }
+--- src/org/apache/crimson/tree/DOMImplementationImpl.java
++++ src/org/apache/crimson/tree/DOMImplementationImpl.java
+@@ -144,4 +144,9 @@
+ 
+         return doc;
+     }
++
++    //java5 build - interface org.w3c.dom.DOMImplementation
++    public Object getFeature(String feature, String version) {
++        throw new RuntimeException("Not implemented");
++    }
+ }
+--- src/org/apache/crimson/tree/Doctype.java
++++ src/org/apache/crimson/tree/Doctype.java
+@@ -322,6 +322,44 @@
+ 	    }
+ 	    out.write ("'>");
+ 	}
++        // java5 build - interface org.w3c.dom.Node
++        public Object setUserData(String key, Object data, UserDataHandler handler) {
++            throw new RuntimeException("Not implemented");
++        }
++        public Object getUserData(String key) {
++            throw new RuntimeException("Not implemented");
++        }
++        public Object getFeature(String feature, String version) {
++            throw new RuntimeException("Not implemented");
++        }
++        public boolean isEqualNode(Node arg) {
++            throw new RuntimeException("Not implemented");
++        }
++        public String lookupNamespaceURI(String prefix) {
++            throw new RuntimeException("Not implemented");
++        }
++        public boolean isDefaultNamespace(String namespaceURI) {
++            throw new RuntimeException("Not implemented");
++        }
++        public String lookupPrefix(String namespaceURI) {
++            throw new RuntimeException("Not implemented");
++        }
++        public boolean isSameNode(Node other) {
++            throw new RuntimeException("Not implemented");
++        }
++        public void setTextContent(String textContent) throws DOMException {
++            throw new RuntimeException("Not implemented");
++        }
++        public String getTextContent() throws DOMException {
++            throw new RuntimeException("Not implemented");
++        }
++        public short compareDocumentPosition(Node other) throws DOMException {
++            throw new RuntimeException("Not implemented");
++        }
++        public String getBaseURI() {
++            throw new RuntimeException("Not implemented");
++        }
++
+     }
+ 
+ 
+@@ -408,6 +446,54 @@
+ 	    }
+ 	    out.write (">");
+ 	}
++        // java5 build - interface org.w3c.dom.Node
++        public Object setUserData(String key, Object data, UserDataHandler handler) {
++            throw new RuntimeException("Not implemented");
++        }
++        public Object getUserData(String key) {
++            throw new RuntimeException("Not implemented");
++        }
++        public Object getFeature(String feature, String version) {
++            throw new RuntimeException("Not implemented");
++        }
++        public boolean isEqualNode(Node arg) {
++            throw new RuntimeException("Not implemented");
++        }
++        public String lookupNamespaceURI(String prefix) {
++            throw new RuntimeException("Not implemented");
++        }
++        public boolean isDefaultNamespace(String namespaceURI) {
++            throw new RuntimeException("Not implemented");
++        }
++        public String lookupPrefix(String namespaceURI) {
++            throw new RuntimeException("Not implemented");
++        }
++        public boolean isSameNode(Node other) {
++            throw new RuntimeException("Not implemented");
++        }
++        public void setTextContent(String textContent) throws DOMException {
++            throw new RuntimeException("Not implemented");
++        }
++        public String getTextContent() throws DOMException {
++            throw new RuntimeException("Not implemented");
++        }
++        public short compareDocumentPosition(Node other) throws DOMException {
++            throw new RuntimeException("Not implemented");
++        }
++        public String getBaseURI() {
++            throw new RuntimeException("Not implemented");
++        }
++
++        //java5 build - interface org.w3c.dom.Entity
++        public String getXmlVersion() {
++            throw new RuntimeException("Not implemented");
++        }
++        public String getXmlEncoding() {
++            throw new RuntimeException("Not implemented");
++        }
++        public String getInputEncoding() {
++            throw new RuntimeException("Not implemented");
++        }
+     }
+ 
+     static class Nodemap implements NamedNodeMap
+@@ -491,4 +577,42 @@
+         }
+ 
+     }
++    // java5 build - interface org.w3c.dom.Node
++    public Object setUserData(String key, Object data, UserDataHandler handler) {
++        throw new RuntimeException("Not implemented");
++    }
++    public Object getUserData(String key) {
++        throw new RuntimeException("Not implemented");
++    }
++    public Object getFeature(String feature, String version) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isEqualNode(Node arg) {
++        throw new RuntimeException("Not implemented");
++    }
++    public String lookupNamespaceURI(String prefix) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isDefaultNamespace(String namespaceURI) {
++        throw new RuntimeException("Not implemented");
++    }
++    public String lookupPrefix(String namespaceURI) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isSameNode(Node other) {
++        throw new RuntimeException("Not implemented");
++    }
++    public void setTextContent(String textContent) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getTextContent() throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public short compareDocumentPosition(Node other) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getBaseURI() {
++        throw new RuntimeException("Not implemented");
++    }
++
+ }
+--- src/org/apache/crimson/tree/ElementNode2.java
++++ src/org/apache/crimson/tree/ElementNode2.java
+@@ -620,4 +620,57 @@
+     {
+ 	writeXml (new XmlWriteContext (out));
+     }
++    
++    // java5 build - interface org.w3c.dom.Node
++    public Object setUserData(String key, Object data, UserDataHandler handler) {
++        throw new RuntimeException("Not implemented");
++    }
++    public Object getUserData(String key) {
++        throw new RuntimeException("Not implemented");
++    }
++    public Object getFeature(String feature, String version) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isEqualNode(Node arg) {
++        throw new RuntimeException("Not implemented");
++    }
++    public String lookupNamespaceURI(String prefix) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isDefaultNamespace(String namespaceURI) {
++        throw new RuntimeException("Not implemented");
++    }
++    public String lookupPrefix(String namespaceURI) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isSameNode(Node other) {
++        throw new RuntimeException("Not implemented");
++    }
++    public void setTextContent(String textContent) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getTextContent() throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public short compareDocumentPosition(Node other) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getBaseURI() {
++        throw new RuntimeException("Not implemented");
++    }
++    
++    // java5 build - interface org.w3c.dom.Element
++    public void setIdAttributeNode(Attr idAttr, boolean isId) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public void setIdAttributeNS(String namespaceURI, String localName, boolean isId) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public void setIdAttribute(String name, boolean isId) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public TypeInfo getSchemaTypeInfo() {
++        throw new RuntimeException("Not implemented");
++    }
++
+ }
+--- src/org/apache/crimson/tree/PINode.java
++++ src/org/apache/crimson/tree/PINode.java
+@@ -155,4 +155,42 @@
+ 
+     /** Returns the PI target name. */
+     public String getNodeName () { return target; }
++
++    // java5 build - interface org.w3c.dom.Node
++    public Object setUserData(String key, Object data, UserDataHandler handler) {
++        throw new RuntimeException("Not implemented");
++    }
++    public Object getUserData(String key) {
++        throw new RuntimeException("Not implemented");
++    }
++    public Object getFeature(String feature, String version) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isEqualNode(Node arg) {
++        throw new RuntimeException("Not implemented");
++    }
++    public String lookupNamespaceURI(String prefix) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isDefaultNamespace(String namespaceURI) {
++        throw new RuntimeException("Not implemented");
++    }
++    public String lookupPrefix(String namespaceURI) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isSameNode(Node other) {
++        throw new RuntimeException("Not implemented");
++    }
++    public void setTextContent(String textContent) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getTextContent() throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public short compareDocumentPosition(Node other) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getBaseURI() {
++        throw new RuntimeException("Not implemented");
++    }
+ }
+--- src/org/apache/crimson/tree/TextNode.java
++++ src/org/apache/crimson/tree/TextNode.java
+@@ -228,4 +228,54 @@
+      * DOM:  Returns the string "#text".
+      */
+     public String getNodeName () { return "#text"; }
++
++    // java5 build - interface org.w3c.dom.Node
++    public Object setUserData(String key, Object data, UserDataHandler handler) {
++        throw new RuntimeException("Not implemented");
++    }
++    public Object getUserData(String key) {
++        throw new RuntimeException("Not implemented");
++    }
++    public Object getFeature(String feature, String version) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isEqualNode(Node arg) {
++        throw new RuntimeException("Not implemented");
++    }
++    public String lookupNamespaceURI(String prefix) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isDefaultNamespace(String namespaceURI) {
++        throw new RuntimeException("Not implemented");
++    }
++    public String lookupPrefix(String namespaceURI) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isSameNode(Node other) {
++        throw new RuntimeException("Not implemented");
++    }
++    public void setTextContent(String textContent) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getTextContent() throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public short compareDocumentPosition(Node other) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getBaseURI() {
++        throw new RuntimeException("Not implemented");
++    }
++
++    //java5 build - interface org.w3c.dom.Text
++    public Text replaceWholeText(String content) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getWholeText() {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isElementContentWhitespace() {
++        throw new RuntimeException("Not implemented");
++    }
++
+ }
+--- src/org/apache/crimson/tree/XmlDocument.java
++++ src/org/apache/crimson/tree/XmlDocument.java
+@@ -1356,6 +1356,43 @@
+             }
+             return retval;
+         }
++        // java5 build - interface org.w3c.dom.Node
++        public Object setUserData(String key, Object data, UserDataHandler handler) {
++            throw new RuntimeException("Not implemented");
++        }
++        public Object getUserData(String key) {
++            throw new RuntimeException("Not implemented");
++        }
++        public Object getFeature(String feature, String version) {
++            throw new RuntimeException("Not implemented");
++        }
++        public boolean isEqualNode(Node arg) {
++            throw new RuntimeException("Not implemented");
++        }
++        public String lookupNamespaceURI(String prefix) {
++            throw new RuntimeException("Not implemented");
++        }
++        public boolean isDefaultNamespace(String namespaceURI) {
++            throw new RuntimeException("Not implemented");
++        }
++        public String lookupPrefix(String namespaceURI) {
++            throw new RuntimeException("Not implemented");
++        }
++        public boolean isSameNode(Node other) {
++            throw new RuntimeException("Not implemented");
++        }
++        public void setTextContent(String textContent) throws DOMException {
++            throw new RuntimeException("Not implemented");
++        }
++        public String getTextContent() throws DOMException {
++            throw new RuntimeException("Not implemented");
++        }
++        public short compareDocumentPosition(Node other) throws DOMException {
++            throw new RuntimeException("Not implemented");
++        }
++        public String getBaseURI() {
++            throw new RuntimeException("Not implemented");
++        }
+     }
+ 
+ 
+@@ -1426,6 +1463,44 @@
+             }
+             return retval;
+         }
++        // java5 build - interface org.w3c.dom.Node
++        public Object setUserData(String key, Object data, UserDataHandler handler) {
++            throw new RuntimeException("Not implemented");
++        }
++        public Object getUserData(String key) {
++            throw new RuntimeException("Not implemented");
++        }
++        public Object getFeature(String feature, String version) {
++            throw new RuntimeException("Not implemented");
++        }
++        public boolean isEqualNode(Node arg) {
++            throw new RuntimeException("Not implemented");
++        }
++        public String lookupNamespaceURI(String prefix) {
++            throw new RuntimeException("Not implemented");
++        }
++        public boolean isDefaultNamespace(String namespaceURI) {
++            throw new RuntimeException("Not implemented");
++        }
++        public String lookupPrefix(String namespaceURI) {
++            throw new RuntimeException("Not implemented");
++        }
++        public boolean isSameNode(Node other) {
++            throw new RuntimeException("Not implemented");
++        }
++        public void setTextContent(String textContent) throws DOMException {
++            throw new RuntimeException("Not implemented");
++        }
++        public String getTextContent() throws DOMException {
++            throw new RuntimeException("Not implemented");
++        }
++        public short compareDocumentPosition(Node other) throws DOMException {
++            throw new RuntimeException("Not implemented");
++        }
++        public String getBaseURI() {
++            throw new RuntimeException("Not implemented");
++        }
++
+     }
+ 
+     class ExtWriteContext extends XmlWriteContext
+@@ -1451,4 +1526,86 @@
+     {
+         Catalog () { super (Catalog.class); }
+     }
++
++    // java5 build - interface org.w3c.dom.Node
++    public Object setUserData(String key, Object data, UserDataHandler handler) {
++        throw new RuntimeException("Not implemented");
++    }
++    public Object getUserData(String key) {
++        throw new RuntimeException("Not implemented");
++    }
++    public Object getFeature(String feature, String version) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isEqualNode(Node arg) {
++        throw new RuntimeException("Not implemented");
++    }
++    public String lookupNamespaceURI(String prefix) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isDefaultNamespace(String namespaceURI) {
++        throw new RuntimeException("Not implemented");
++    }
++    public String lookupPrefix(String namespaceURI) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean isSameNode(Node other) {
++        throw new RuntimeException("Not implemented");
++    }
++    public void setTextContent(String textContent) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getTextContent() throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public short compareDocumentPosition(Node other) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getBaseURI() {
++        throw new RuntimeException("Not implemented");
++    }
++
++    // java5 build - interface org.w3c.DocumentType
++    public Node renameNode(Node n, String namespaceURI, String qualifiedName) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public void normalizeDocument() {
++        throw new RuntimeException("Not implemented");
++    }
++    public DOMConfiguration getDomConfig() {
++        throw new RuntimeException("Not implemented");
++    }
++    public Node adoptNode(Node source) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public void setDocumentURI(String documentURI) {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getDocumentURI() {
++        throw new RuntimeException("Not implemented");
++    }
++    public void setStrictErrorChecking(boolean strictErrorChecking) {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean getStrictErrorChecking() {
++        throw new RuntimeException("Not implemented");
++    }
++    public void setXmlVersion(String xmlVersion) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getXmlVersion() {
++        throw new RuntimeException("Not implemented");
++    }
++    public void setXmlStandalone(boolean xmlStandalone) throws DOMException {
++        throw new RuntimeException("Not implemented");
++    }
++    public boolean getXmlStandalone() {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getXmlEncoding() {
++        throw new RuntimeException("Not implemented");
++    }
++    public String getInputEncoding() {
++        throw new RuntimeException("Not implemented");
++    }
+ }
