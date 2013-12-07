@@ -37,7 +37,7 @@
 Name: crimson
 Epoch: 0
 Version: 1.1.3
-Release: 20
+Release: 21
 Summary: Java XML parser
 
 Group: Development/Java
