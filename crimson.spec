@@ -44,7 +44,7 @@ Group: Development/Java
 #Vendor: %{?_vendorinfo:%{_vendorinfo}}%{!?_vendorinfo:%{_vendor}}
 #Distribution: %{?_distribution:%{_distribution}}%{!?_distribution:%{_vendor}}
 License: Apache Software License
-URL: http://xml.apache.org/%{name}
+URL: https://xml.apache.org/%{name}
 Source0: http://xml.apache.org/dist/%{name}/%{name}-%{version}-src.tar.gz
 Patch0: %{name}-noapis.patch
 Patch1: %{name}-javac6-build.patch
